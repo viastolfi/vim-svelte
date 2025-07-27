@@ -23,6 +23,10 @@ syntax match htmlTagName contained "\<[a-zA-Z:\.]*\>"
 " Special attributes that include some kind of binding e.g. "on:click",
 " "bind:something", etc.
 syntax match svelteKeyword "\<[a-z]\+:[a-zA-Z|]\+=" contained containedin=htmlTag
+"   Allow new "onsomthing" syntax to be marked as keyword
+syntax match svelteDirective /on[a-zA-Z]\+/ contained containedin=htmlTag
+syntax match svelteDirective /bind[a-zA-Z]\+/ contained containedin=htmlTag
+syntax match svelteDirective /class[a-zA-Z]\+/ contained containedin=htmlTag
 
 " The "slot" attribute has special meaning.
 syntax keyword svelteKeyword slot contained containedin=htmlTag
@@ -42,10 +46,9 @@ syntax match svelteKeyword "#await" contained containedin=jsBlock,javascriptBloc
 syntax match svelteKeyword "/await" contained containedin=jsBlock,javascriptBlock
 syntax match svelteKeyword ":catch" contained containedin=jsBlock,javascriptBlock
 syntax match svelteKeyword ":then" contained containedin=jsBlock,javascriptBlock
-
-" Svelte 5 runes support
-" Match $runes even if inside JavaScript function calls or types
-syntax match svelteRune /\$\%(state\|effect\|props\|derived\|computed\|inspect\)\>/ containedin=ALL
+"   Svelte 5 runes support
+"   Match $runes even if inside JavaScript function calls or types
+syntax match svelteRune /\$\%(state\|effect\|props\|derived\|computed\|inspect\)\>/ containedin=javascript
 highlight def link svelteRune Keyword
 
 " Inline keywords.
@@ -56,6 +59,7 @@ syntax match svelteKeyword "@debug" contained containedin=jsBlock,javascriptBloc
 syntax match svelteRepeat "#each" contained containedin=jsBlock,javascriptBlock
 syntax match svelteRepeat "/each" contained containedin=jsBlock,javascriptBlock
 
+highlight def link svelteDirective Keyword
 highlight def link svelteConditional Conditional
 highlight def link svelteKeyword Keyword
 highlight def link svelteRepeat Repeat
