@@ -43,6 +43,11 @@ syntax match svelteKeyword "/await" contained containedin=jsBlock,javascriptBloc
 syntax match svelteKeyword ":catch" contained containedin=jsBlock,javascriptBlock
 syntax match svelteKeyword ":then" contained containedin=jsBlock,javascriptBlock
 
+" Svelte 5 runes support
+" Match $runes even if inside JavaScript function calls or types
+syntax match svelteRune /\$\%(state\|effect\|props\|derived\|computed\|inspect\)\>/ containedin=ALL
+highlight def link svelteRune Keyword
+
 " Inline keywords.
 syntax match svelteKeyword "@html" contained containedin=jsBlock,javascriptBlock
 syntax match svelteKeyword "@debug" contained containedin=jsBlock,javascriptBlock
